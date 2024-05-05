@@ -169,6 +169,14 @@ export default function StudentController() {
         return { errno: 404, ...e };
       }
     },
+
+    getGrade(map, key){
+      for(let obj of map){
+        if(obj['courseCode'] === key) return obj['gradePoints']
+      }
+
+     },
+
     getResult: async function ({ roll, regulation_, year, semester }) {
       try {
         let regulation_subjects = await regulation.findOne({
@@ -185,19 +193,19 @@ export default function StudentController() {
           semester: semester,
         });
         console.log(marks);
-        // let result = JSON.parse(JSON.stringify(regulation_subjects));
-        // result.roll = roll;
-        // let cumReg = 0,
-        //   cumSum = 0;
-        // for (const [k, v] of Object.entries(marks.subjects)) {
-        //   result.subjects[k].grade = v;
-        //   if (v == 0 || result.subjects[k].credits < 0) continue;
-        //   cumReg += result.subjects[k] ? result.subjects[k].credits : 3;
-        //   cumSum += v * (result.subjects[k] ? result.subjects[k].credits : 3);
-        // }
-        // result.creditSum = cumReg;
-        // result.total = (cumSum / cumReg).toFixed(2);
-        return marks;
+        // console.log(regulation_subjects['subjects'][0])
+        let cumReg = 0, cumSum = 0;
+        for (const k in regulation_subjects['subjects'][0]) {
+          // console.log(k)
+          let creds = regulation_subjects['subjects'][0][k]['credits']
+          // console.log(creds)
+          if (creds == 0 || creds < 0) continue;
+          cumReg += creds
+          cumSum += creds * this.getGrade(marks['subjects'], k)
+        }
+        let gpa = (cumSum / cumReg).toFixed(2);
+        // console.log(marks)
+        return [cumReg, gpa, marks];
       } catch (e) {
         return { errno: 404, ...e };
       }

@@ -54,16 +54,16 @@ export class UploadResultsCsvComponent {
 	}
 
 	uploadResults() {
-		console.log('Ajay', this.result_element[0])
+		// console.log('Ajay', this.result_element[0])
 		if (this.regulation == '' || this.year == '' || this.semester == '') {
 			alert('fill required details')
 			location.reload()
 			return
 		}
 		let i = 0, n = this.result_element.length
-		console.log(this.result_element)
+		// console.log(this.result_element)
 		for (const obj of this.result_element) {
-			console.log('Ajay', obj['subjects'])
+			// console.log('Ajay', obj['subjects'])
 			this.bk.post('/admin/upload-result', obj).subscribe(data => {
 				++i
 				if (data.errno != undefined) {
@@ -75,10 +75,12 @@ export class UploadResultsCsvComponent {
 					Swal.fire({
 						title: "Good job!",
 						text: "Results Uploaded Successfully!",
-						icon: "success"
+						icon: "success",
+						timer: 3000
+					  }).then((result) => {
+						location.reload()
 					  });
-					alert('')
-					location.reload()
+					
 				}
 			})
 		}
@@ -98,7 +100,7 @@ export class UploadResultsCsvComponent {
 			const sheetName = workbook.SheetNames[0]
 			const worksheet = workbook.Sheets[sheetName]
 			const excelData: any = XLSX.utils.sheet_to_json(worksheet, { raw: true })
-			console.log('Hi', excelData)
+			// console.log('Hi', excelData)
 			for (let i = 0; i < excelData.length; i++) {
 				let result: Record<string, any> = excelData[i]
 				let roll = result['roll']
@@ -121,14 +123,15 @@ export class UploadResultsCsvComponent {
 							icon: "error",
 							title: "Oops...",
 							text: "Error in CSV File Or DataBase",
-						  });
-						location.reload()
+						  }).then((result) => {	
+							location.reload()
+						  	});
 					}
 					subjects.push({ courseCode: key, courseTitle: key_map[key]['name'], gradePoints: result[key] });
 				}
 				pdata['subjects'] = subjects
 				this.result_element.push(pdata)
-				console.log(this.result_element[0]['subjects'])
+				// console.log(this.result_element[0]['subjects'])
 			}
 		}
 		reader.readAsArrayBuffer(file)

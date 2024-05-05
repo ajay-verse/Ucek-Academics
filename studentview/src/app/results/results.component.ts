@@ -52,10 +52,9 @@ export class ResultsComponent {
 		params.regulation_ = this.user_data.regulation;
 		// return
 		this.bk.post('/student/result', params).subscribe((data) => {
-			console.log(data);
 			this.ryear = params.year;
 			this.rsem = params.semester;
-			var return_data = data.subjects;
+			var return_data = data[2].subjects;
 
 			this.result.subjects = new Array();
 

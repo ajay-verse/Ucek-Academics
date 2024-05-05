@@ -15,12 +15,11 @@ import HashMap from "hashmap";
 
 const studentController = StudentController();
 
-function getHTMLFormat(cumReg, gpa, result) {
+function getHTMLFormat(result) {
   if (!result) {
     throw "No result available";
   }
   result.subjects = Object.entries(result.subjects);
-  console.log(result.subjects)
   let body = `
                 <p>Roll Number: ${result.roll}</p>
                 <p>Year: ${result.year}, Semester: ${result.semester}</p>
@@ -34,16 +33,16 @@ function getHTMLFormat(cumReg, gpa, result) {
   for (const subject of result.subjects) {
     body += `
                     <tr>
-                        <th>${subject[1]['courseCode']}</th>
-                        <td>${subject[1]['courseTitle']}</td>
-                        <th>${subject[1]['gradePoints']}</th>
+                        <th>${subject[0]}</th>
+                        <td>${subject[1].name}</td>
+                        <th>${subject[1].grade}</th>
                     </tr>
                 `;
   }
   body += `
                 </table>
-                <p>GPA : ${gpa}</p>
-                <p>Credits : ${cumReg}</p>
+                <p>GPA : ${result.total}</p>
+                <p>Credits : ${result.creditSum}</p>
             `;
   return body;
 }
@@ -103,7 +102,6 @@ export default function AdminController() {
       regulation,
       result_type,
     }) {
-      // console.log('Hi')
       try {
         const stud = await student.findOne({ roll: roll });
         const p_data = await examResult.findOne({
@@ -113,7 +111,6 @@ export default function AdminController() {
         });
         console.log(p_data);
         if (!p_data) {
-          // console.log('Mok')
           const examRes = new examResult({
             roll: roll,
             semester: semester,
@@ -124,11 +121,8 @@ export default function AdminController() {
             result_type: result_type,
           });
           const result = await examRes.save();
-          console.log('Hello')
-          this.sendResult({roll, regulation_:regulation, year, semester});
           return result;
         } else {
-          // console.log('Drrr')
           const p_sub = JSON.parse(JSON.stringify(p_data.subjects));
           const result = await examResult.updateOne(
             { roll: roll, semester: semester, year: year },
@@ -141,7 +135,6 @@ export default function AdminController() {
               },
             }
           );
-          // console.log('Ajay')
           this.sendResult({roll, regulation_:regulation, year, semester});
           return result;
         }
@@ -340,16 +333,14 @@ export default function AdminController() {
     },
     sendResult: async function ({ roll, regulation_, year, semester }) {
       try {
-        console.log('Ajay')
         const stud = await student.findOne({ roll: roll });
-        let [cumReg, gpa, result] = await studentController.getResult({
+        let result = await studentController.getResult({
           roll: roll,
           regulation_: regulation_,
           year: year,
           semester: semester,
         });
-        let body = getHTMLFormat(cumReg, gpa, result);
-        console.log(cumReg, gpa)
+        let body = getHTMLFormat(result);
         let status = await sendMail({
           receiverMail: stud.email,
           mailBody: body,

@@ -1,0 +1,244 @@
+<div *ngIf="show_img" class="pop-img">
+	<div class="text-center">
+		<div *ngIf="img_src" class="popImg">
+			<img [src]="img_src" alt="" class="text-center" />
+		</div>
+		<div *ngIf="!img_src" class="p-5 noPopImg">
+			<h1>Receipt Not Found</h1>
+		</div>
+	</div>
+</div>
+
+<ngx-loading [show]="loading"></ngx-loading>
+
+<body class="{{ class_name }}">
+	<app-header (toggleEvent)="changeClass()"></app-header>
+
+	<!-- ======= Sidebar ======= -->
+	<app-sidebar></app-sidebar>
+
+	<main id="main" class="main">
+		<div class="pagetitle">
+			<h1>Applications for Halltickets</h1>
+		</div>
+		<!-- End Page Title -->
+
+		<section class="light">
+			<table class="table table-hover">
+				<thead>
+					<tr>
+						<th scope="col">S.No.</th>
+						<th scope="col">{{ "Roll No.".toUpperCase() }}</th>
+						<th scope="col">{{ "Year".toUpperCase() }}</th>
+						<th scope="col">{{ "Semester".toUpperCase() }}</th>
+						<th scope="col">{{ "Name".toUpperCase() }}</th>
+						<th scope="col">{{ "Branch".toUpperCase() }}</th>
+						<th scope="col">
+							{{ "regular/Supply".toUpperCase() }}
+						</th>
+						<th scope="col">
+							{{ "listOfSubjects".toUpperCase() }}
+						</th>
+						<th scope="col">{{ "View".toUpperCase() }}</th>
+						<th scope="col">{{ "Approve".toUpperCase() }}</th>
+						<th scope="col">{{ "Reject".toUpperCase() }}</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr *ngFor="let app of applications; let i = index">
+						<td scope="col">{{ i + 1 }}</td>
+						<td scope="col">{{ app.roll_no }}</td>
+						<td scope="col">{{ year_map(app.year) }}</td>
+						<td scope="col">{{ semester_map(app.semester) }}</td>
+						<td scope="col">{{ app.name }}</td>
+						<td scope="col">{{ app.branch }}</td>
+						<td scope="col">{{ app.regularSupply }}</td>
+						<td scope="col">{{ app.listOfSubjects }}</td>
+						<td scope="col">
+							<button
+								class="btn btn-primary"
+								(click)="getHallticket(app)"
+							>
+								View
+							</button>
+						</td>
+						<td scope="col">
+							<button
+								class="btn btn-success"
+								(click)="approveApplication(app._id)"
+							>
+								Approve
+							</button>
+						</td>
+						<td scope="col">
+							<button
+								class="btn btn-danger"
+								(click)="rejectApplication(app._id)"
+							>
+								Reject
+							</button>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+
+			<div class="mt-3" id="hallTicket" #hallTicket *ngIf="show_doc">
+				<div class="d-flex justify-content-between">
+					<div style="margin-top: 15px;">
+						<img src="assets/img/studentimages/jntuk-logo.png" alt="jntu-logo" style="height: 75px" />
+					</div>
+					<div class="text-center">
+						<p><b>Jawaharlal Nehru Technological University Kakinada</b></p>
+						<h5><b>COLLEGE OF ENGINEERING : : KAKINADA</b></h5>
+						<p class="font-weight-bold">(Autonmous)</p>
+						<p class="font-weight-bold">Hall Ticket {{year_map2[s_year] || year_map2[0]}} Year Examination</p>
+					</div>
+					<div class="mt-5">
+						<table>
+							<tr>
+								<td><b>ORIGINAL</b></td>
+							</tr>
+						</table>
+					</div>
+				</div>
+				<div>
+					<hr style="border: 1px solid #000" />
+				</div>
+				<div class="my-2 d-flex flex-row-reverse">
+					<span>
+						<table style="height:20px">
+							<tr>
+								<td *ngFor="let chr of roll_array" style="width: 20px">{{chr}}</td>
+							</tr>
+						</table>
+					</span>
+					<span class="mx-1">
+						<p class="text-center"><b>Hall Ticket No. : </b>
+						</p>
+					</span>
+
+				</div>
+				<div class="d-flex justify-content-between">
+					<div>
+						<p><b>1. Name of the Candidate</b></p>
+						<p><b>2. Father's / Husband's Name</b></p>
+						<p><b>3. Branch</b></p>
+						<p><b>4. Examination Particulars</b></p>
+					</div>
+					<div class="col-1">
+						<p><b>:</b></p>
+						<p><b>:</b></p>
+						<p><b>:</b></p>
+						<p><b>:</b></p>
+					</div>
+					<div>
+						<p class="text-uppercase">{{ student_name }}</p>
+						<p>{{s_father_name}}</p>
+						<p>{{s_branch}}</p>
+						<p></p>
+					</div>
+					<div class="text-center">
+						<div class="panel panel-default" style="width:100px;height:100px;border:1px solid black ">
+							<div class="mt-3 panel-body text-center">Affix Recent Photograph</div>
+						</div>
+					</div>
+				</div>
+
+				<div>
+					<p><b>(Put tick ✓ in the relavant box)</b></p>
+					<div class="d-flex justify-content-between">
+						<div>
+							<table class="tab">
+								<tr>
+									<th>I Sem</th>
+									<th>II Sem</th>
+								</tr>
+								<tr>
+									<th *ngIf="s_semester == '2'"></th>
+									<th>✓</th>
+									<th *ngIf="s_semester == '1'"></th>
+								</tr>
+							</table>
+						</div>
+
+						<div>
+							<table class="tab">
+								<tr>
+									<th>Regular</th>
+									<th>Supply</th>
+								</tr>
+								<tr>
+									<th *ngIf="hallticket_data.exam_type == 'SUP'"></th>
+									<th>✓</th>
+									<th *ngIf="hallticket_data.exam_type == 'REG'"></th>
+								</tr>
+							</table>
+						</div>
+
+						<div>
+							<table class="tab">
+								<tr>
+									<th>Month</th>
+									<th>Year</th>
+								</tr>
+								<tr>
+									<th>April</th>
+									<th>2023</th>
+								</tr>
+							</table>
+						</div>
+					</div>
+				</div>
+
+				<div>
+					<p><b>5. List of Subjects Registered : </b></p>
+				</div>
+				<div>
+					<table style="width:100%;height:10px">
+						<tr>
+							<th colspan="2" class="text-center"><b>Name of the Subjects(As Per Syllabus)</b></th>
+						</tr>
+						<tr>
+							<th colspan="2" class="text-center"><b>THEORY</b></th>
+						</tr>
+						<tr *ngFor="let subject of theory; let i = index">
+							<td style="width: 5%;">{{i + 1}}</td>
+							<td style="width: 95%;">{{subject}}</td>
+						</tr>
+						<tr>
+							<th colspan="2" class="text-center"><b>PRATICALS</b></th>
+						</tr>
+						<tr *ngFor="let subject of labs; let i = index">
+							<td style="width: 5%;">{{i + 1}}</td>
+							<td style="width: 95%;">{{subject}}</td>
+						</tr>
+					</table>
+				</div>
+
+				<div class="mt-5 d-flex justify-content-between">
+					<div id="stud-sign">
+						<p><b>Signature of Candidate</b></p>
+					</div>
+					<div id="vp-sign">
+						<p><b>Signature of Prinicipal</b></p>
+					</div>
+				</div>
+			</div>
+			<button
+				*ngIf="show_doc"
+				class="btn btn-primary"
+				(click)="downloadPdf(s_roll)"
+			>
+				Download PDF
+			</button>
+			<!-- <button >Download Hall ticket<\/button> -->
+		</section>
+	
+	<!-- End #main -->
+	
+		
+	</main>
+
+	<!-- ======= Footer ======= -->
+	<app-footer></app-footer>
+</body>

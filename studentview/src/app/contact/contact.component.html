@@ -1,0 +1,108 @@
+<body class="{{ class_name }}">
+	<app-header (toggleEvent)="changeClass()"></app-header>
+	<body>
+		<main id="main" class="main">
+			<div class="pagetitle py-3">
+				<h1>Query</h1>
+			</div>
+			<!-- End Page Title -->
+
+			<section class="section contact">
+				<div class="row gy-4">
+					<div class="col-xl-12">
+						<div class="card p-4">
+							<form
+								#contactForm="ngForm"
+								(ngSubmit)="postQuery(contactForm.value)"
+								class="php-email-form"
+							>
+								<div class="form-outline mb-4">
+									<label for="year">Admin</label>
+									<select
+										class="form-select"
+										ngModel
+										name="adminId"
+										aria-label="Default select example"
+									>
+										<option selected value="" disabled>
+											Select Admin
+										</option>
+										<option
+											*ngFor="let admin of adminList"
+											[value]="admin._id"
+										>
+											{{ admin.first_name }}
+											{{ admin.last_name }}
+										</option>
+									</select>
+								</div>
+								<div class="row gy-4">
+									<div class="col-md-6">
+										<input
+											type="text"
+											name="name"
+											ngModel
+											class="form-control"
+											placeholder="Your Name"
+											required
+										/>
+									</div>
+
+									<div class="col-md-6">
+										<input
+											type="email"
+											class="form-control"
+											name="email"
+											ngModel
+											placeholder="Your Email"
+											required
+										/>
+									</div>
+
+									<div class="col-md-12">
+										<input
+											type="text"
+											class="form-control"
+											name="topic_of_subject"
+											ngModel
+											placeholder="Topic of Subject"
+											required
+										/>
+									</div>
+
+									<div class="col-md-12">
+										<textarea
+											class="form-control"
+											name="query_msg"
+											rows="6"
+											ngModel
+											placeholder="Query message type..."
+											required
+										></textarea>
+									</div>
+
+									<div class="col-md-12 text-center">
+										<div class="loading">Loading</div>
+										<div class="error-message"></div>
+										<div class="sent-message">
+											Your message has been sent. Thank
+											you!
+										</div>
+
+										<button type="submit">
+											Send Message
+										</button>
+									</div>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+			</section>
+		</main>
+		<!-- End #main -->
+
+		<!-- ======= Footer ======= -->
+		<app-footer></app-footer>
+	</body>
+</body>

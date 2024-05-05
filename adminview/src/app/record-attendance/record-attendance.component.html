@@ -1,0 +1,149 @@
+<body class="{{ class_name }}">
+	<app-header (toggleEvent)="changeClass()"></app-header>
+
+	<!-- ======= Sidebar ======= -->
+	<app-sidebar></app-sidebar>
+
+	<main id="main" class="main">
+		<div class="pagetitle">
+			<h1>Record Attendance</h1>
+		</div>
+		<!-- End Page Title -->
+
+		<section class="light">
+			<form
+				#resultForm="ngForm"
+				(ngSubmit)="uploadAttendance(resultForm.value)"
+			>
+				<div class="d-flex">
+					<div class="form-floating container mt-3">
+						<input
+							type="text"
+							ngModel
+							name="roll_number"
+							id="roll_number"
+							class="form-control"
+						/>
+						<label for="floatingSelect" class="mx-3"
+							>Enter Roll Number</label
+						>
+					</div>
+					<div class="form-floating container mt-3">
+						<input
+							type="text"
+							ngModel
+							name="course_code"
+							id="course_code"
+							class="form-control"
+						/>
+						<label for="floatingSelect" class="mx-3"
+							>Enter Course Code</label
+						>
+					</div>
+					<div class="form-floating container mt-3">
+						<select
+							class="form-select"
+							[(ngModel)]="year"
+							(change)="checkParams()"
+							name="year"
+							id="year"
+							aria-label="Floating label select example"
+						>
+							<option selected value="">Select Year</option>
+							<option value="1">1st year</option>
+							<option value="2">2nd year</option>
+							<option value="3">3rd year</option>
+							<option value="4">4th year</option>
+						</select>
+						<label for="floatingSelect" class="mx-3"
+							>Choose Year</label
+						>
+					</div>
+				</div>
+				<table class="table table-hover mt-3">
+					<thead>
+						<tr class="">
+							<th scope="col">S.No.</th>
+							<th scope="col">Month</th>
+							<th scope="col">Number of classes Conducted</th>
+							<th scope="col">Number of classes Attended</th>
+							<th scope="col">
+								<button
+									type="button"
+									(click)="addRow()"
+									class="btn btn-primary"
+								>
+									Add Row
+								</button>
+							</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr *ngFor="let row of rows; let i = index" class="">
+							<td>{{ i + 1 }}</td>
+							<td>
+								<select
+									class="form-select"
+									[(ngModel)]="row.month"
+									(change)="checkDuplicateAttendanceRecord(i)"
+									name="month_{{ i }}"
+								>
+									<option value="">Select Month</option>
+									<option value="1">January</option>
+									<option value="2">February</option>
+									<option value="3">March</option>
+									<option value="4">April</option>
+									<option value="5">May</option>
+									<option value="6">June</option>
+									<option value="7">July</option>
+									<option value="8">August</option>
+									<option value="9">September</option>
+									<option value="10">October</option>
+									<option value="11">November</option>
+									<option value="12">December</option>
+								</select>
+							</td>
+							<td>
+								<input
+									type="text"
+									name="classesConducted_{{ i }}"
+									class="form-control"
+									[(ngModel)]="row.classesConducted"
+								/>
+							</td>
+							<td>
+								<input
+									type="text"
+									name="classesAttended_{{ i }}"
+									class="form-control"
+									[(ngModel)]="row.classesAttended"
+								/>
+							</td>
+							<td>
+								<button
+									(click)="removeRow(i)"
+									class="btn btn-danger"
+								>
+									Remove
+								</button>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+
+				<div *ngFor="let subject of attendance" class="d-flex">
+					<div></div>
+				</div>
+				<div class="d-grid gap-2 col-6 mx-auto my-3">
+					<button class="btn btn-outline-primary" type="submit">
+						Submit Result
+					</button>
+				</div>
+			</form>
+		</section>
+	</main>
+	<!-- End #main -->
+
+	<!-- ======= Footer ======= -->
+	<app-footer></app-footer>
+</body>

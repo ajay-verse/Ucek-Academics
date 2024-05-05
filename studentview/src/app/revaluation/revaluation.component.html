@@ -1,0 +1,151 @@
+<ngx-loading [show]="loading"></ngx-loading>
+
+<body class="{{ class_name }}">
+	<app-header (toggleEvent)="changeClass()"></app-header>
+
+	<main id="main" class="main">
+		<div class="pagetitle">
+			<h1>Revaluation Application</h1>
+		</div>
+		<!-- End Page Title -->
+
+		<section class="bg-image">
+			<div
+				class="p-lg-5 p-md-3 p-sm-0 mask d-flex align-items-center h-100 gradient-custom-3"
+			>
+				<div class="container h-100">
+					<div
+						class="row d-flex justify-content-center align-items-center h-100"
+					>
+						<div class="col-12 col-md-9 col-lg-7 col-xl-6">
+							<div class="card" style="border-radius: 15px">
+								<div class="card-body p-5">
+									<h2 class="text-center fw-bold mb-5">
+										Revaluation Application
+									</h2>
+									<form
+										#revaluationForm="ngForm"
+										(ngSubmit)="
+											applyForRevaluation(
+												revaluationForm.value
+											)
+										"
+									>
+										<div class="form-outline mb-4">
+											<label class="form-label" for="roll"
+												>Roll Number</label
+											>
+											<input
+												type="text"
+												[(ngModel)]="roll"
+												id="roll"
+												name="roll"
+												class="form-control form-control-lg"
+												disabled="true"
+											/>
+										</div>
+										<div class="form-outline mb-4">
+											<label for="year">Year</label>
+											<select
+												class="form-select"
+												id="year"
+												[(ngModel)]="year"
+												name="year"
+												aria-label="Default select example"
+											>
+												<option selected value="">
+													Select Year
+												</option>
+												<option value="1">
+													1st Year
+												</option>
+												<option value="2">
+													2nd Year
+												</option>
+												<option value="3">
+													3rd Year
+												</option>
+												<option value="4">
+													4th Year
+												</option>
+											</select>
+										</div>
+										<div class="form-outline mb-4">
+											<label for="sem"
+												>Select Semester</label
+											>
+											<select
+												class="form-select"
+												id="semester"
+												[(ngModel)]="semester"
+												name="semester"
+												aria-label="Default select example"
+											>
+												<option selected value="">
+													Select Semester
+												</option>
+												<option value="1">
+													1st Semester
+												</option>
+												<option value="2">
+													2nd Semester
+												</option>
+											</select>
+										</div>
+										<div class="form-outline mb-4">
+											<label
+												class="form-label"
+												for="form3Example1cg"
+												>SUBJECTS</label
+											>
+											<input
+												type="text"
+												id="subjects"
+												name="subjects"
+												[(ngModel)]="subjects"
+												class="form-control form-control-lg"
+											/>
+										</div>
+										<div class="form-outline mb-4">
+											<label
+												class="form-label"
+												for="challana"
+												>DU Number / Payment ID</label
+											>
+											<input
+												type="text"
+												id="DU_number"
+												[(ngModel)]="DU_number"
+												name="DU_number"
+												class="form-control form-control-lg"
+											/>
+										</div>
+										<input
+											class="btn mb-3"
+											type="file"
+											#fileInput
+											(change)="handleFileInput($event)"
+										/>
+										<div
+											class="d-flex justify-content-center"
+										>
+											<input
+												type="submit"
+												class="btn btn-primary btn-block mb-4"
+												value="Submit"
+											/>
+										</div>
+									</form>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+	</main>
+	<!-- End #main -->
+
+	<!-- ======= Footer ======= -->
+	<app-footer></app-footer>
+</body>

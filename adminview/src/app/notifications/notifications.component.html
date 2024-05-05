@@ -1,0 +1,105 @@
+<body class="{{ class_name }}">
+	<app-header (toggleEvent)="changeClass()"></app-header>
+	<body>
+		<!-- ======= Header ======= -->
+		<app-header></app-header>
+
+		<!-- ======= Sidebar ======= -->
+		<app-sidebar></app-sidebar>
+
+		<main id="main" class="main">
+			<div class="pagetitle">
+				<h1>Upload Notifications</h1>
+			</div>
+			<!-- End Page Title -->
+
+			<section class="light">
+				<div>
+					<form
+						#notificationForm="ngForm"
+						(submit)="postNotification(notificationForm.value)"
+					>
+						<div class="container">
+							<div class="row">
+								<!-- Year Selection -->
+								<div class="col-6">
+									<h5>Year</h5>
+									<select
+										class="form-control form-select"
+										ngModel
+										name="year"
+										id="year"
+									>
+										<option value="0" selected>
+											All years
+										</option>
+										<option value="1">1st Year</option>
+										<option value="2">2nd Year</option>
+										<option value="3">3rd Year</option>
+										<option value="4">4th Year</option>
+									</select>
+								</div>
+								<!-- Branch Selection -->
+								<div class="col-6">
+									<h5>Branch</h5>
+									<select
+										class="form-control form-select"
+										ngModel
+										name="branch"
+										id="branch"
+									>
+										<option value="0" selected>
+											All Branches
+										</option>
+										<option value="1">CIVIL</option>
+										<option value="2">EEE</option>
+										<option value="3">MECH</option>
+										<option value="4">ECE</option>
+										<option value="5">CSE</option>
+										<option value="6">CHE</option>
+										<option value="7">PE</option>
+									</select>
+								</div>
+							</div>
+							<!-- Message Textarea -->
+							<div class="form-outline my-5">
+								<textarea
+									class="form-control"
+									name="data"
+									ngModel
+									id="data"
+									rows="10"
+								></textarea>
+								<label class="form-label" for="data"
+									>Write your message</label
+								>
+							</div>
+							<!-- File Input -->
+							<div>
+								<input
+									class="btn mb-3"
+									type="file"
+									name="file"
+									(change)="handleFileInput($event)"
+								/>
+							</div>
+							<!-- Upload Button -->
+							<div>
+								<button
+									class="col-lg-3 col-md-12 col-sm-12 float-right btn btn-primary"
+									type="submit"
+								>
+									Upload Notification
+								</button>
+							</div>
+						</div>
+					</form>
+				</div>
+			</section>
+		</main>
+		<!-- End #main -->
+
+		<!-- ======= Footer ======= -->
+		<app-footer></app-footer>
+	</body>
+</body>

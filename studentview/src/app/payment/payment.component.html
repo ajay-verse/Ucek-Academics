@@ -1,0 +1,53 @@
+<body class="{{class_name}}">
+	<app-header (toggleEvent)="changeClass()"></app-header>
+
+	<main id="main" class="main">
+
+		<div class="pagetitle">
+			<h1>Payment</h1>
+		</div><!-- End Page Title -->
+
+		<section class="light">
+			<div class="d-flex justify-content-center">
+				<div class="col-lg-6 col-md-8 col-12">
+					<form #paymentForm="ngForm" (ngSubmit)="confirmPayment(paymentForm.value)">
+						<h2 class="text-center my-3">Fill the Payment Form</h2>
+						<div class="form-outline mb-4">
+							<label class="form-label" for="roll">Enter Roll Number</label>
+							<input type="text" id="roll" ngModel name="roll" class="form-control" placeholder="Roll Number"/>
+						</div>
+						<div class="form-outline mb-4">
+							<label class="form-label" for="name">Enter Your Name</label>
+							<input type="text" id="name" ngModel name="name" class="form-control" placeholder="Full name" />
+						</div>
+						<div class="form-outline mb-4">
+							<label class="form-label" for="email">Enter Your Email</label>
+							<input type="email" id="email" ngModel name="email" class="form-control" placeholder="Email Address" />
+						</div>
+						<div class="form-outline mb-4">
+							<label class="form-label" for="purpose">Purpose</label>
+							<select ngModel name="purpose" id="purpose" class="form-select">
+								<option value="" selected>Select One</option>
+								<option value="Exam Fee">Exam Fee</option>
+								<option value="bonafide">Bonafide certificate</option>
+								<option value="custodian">Custodian certificate</option>
+								<option value="course_completion_certificate">Course Completion Certificate</option>
+							</select>
+						</div>
+						<div class="form-outline mb-4">
+							<label class="form-label" for="amount">Enter Your Amount</label>
+							<input type="number" id="amount" ngModel name="amount" class="form-control" placeholder="Enter Amount" />
+						</div>
+						<div class="text-center">
+							<button class="btn btn-primary" type="submit">Submit Details</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</section>
+	</main><!-- End #main -->
+
+	<!-- ======= Footer ======= -->
+	<app-footer></app-footer>
+
+</body>

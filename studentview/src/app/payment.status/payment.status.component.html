@@ -1,0 +1,32 @@
+<body class="{{class_name}}">
+	<app-header (toggleEvent)="changeClass()"></app-header>
+
+	<main id="main" class="main">
+
+		<div class="pagetitle">
+			<h1>Payment Status</h1>
+		</div><!-- End Page Title -->
+
+		<section class="light">
+
+			<div class="card">
+				<h5 class="card-header">Here are your payment Details</h5>
+				<div class="card-body">
+					<h5 class="card-title">Payment_id: {{details.payment_id || "loading..."}}</h5>
+					<p class="card-text">Roll: {{details.roll || "loading..."}}</p>
+					<p class="card-text">Name: {{details.name || "loading..."}}</p>
+					<p class="card-text">Email: {{details.email || "loading..."}}</p>
+					<p class="card-text">Purpose: {{details.purpose || "loading..."}}</p>
+					<p class="card-text">Status: {{details.status || "loading..."}}</p>
+					<p class="card-text">Amount: Rs.{{(+details.amount) / 100 || "loading..."}}</p>
+					<a href="/home" class="btn btn-primary">Go To Home</a>
+				</div>
+			</div>
+
+		</section>
+	</main><!-- End #main -->
+
+	<!-- ======= Footer ======= -->
+	<app-footer></app-footer>
+
+</body>

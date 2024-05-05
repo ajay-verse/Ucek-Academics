@@ -1,0 +1,50 @@
+<body class="{{class_name}}">
+	<app-header (toggleEvent)="changeClass()"></app-header>
+	<main id="main" class="main">
+		<div class="pagetitle">
+			<h1>Jntuk Map</h1>
+			<nav>
+				<ol class="breadcrumb">
+					<li class="breadcrumb-item">
+						<a href="/home">Home</a>
+					</li>
+					<li class="mx-2"> / </li>
+					<li>
+						<a (click)="setLocation()">Set Location</a>
+					</li>
+					<li class="mx-2"> / </li>
+					<li>
+						<a (click)="navBars()">Navigate</a>
+					</li>
+				</ol>
+			</nav>
+			<div class="map-container col-12">
+				<div class="map-frame">
+					<div id="map">
+					</div>
+				</div>
+			</div>
+			<div class="mt-5">
+				<table class="table table-hover">
+					<thead>
+						<tr>
+							<th scope="col">Sl No.</th>
+							<th scope="col">place</th>
+							<th scope="col">Go To</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr *ngFor="let building of markers; let i = index">
+							<th scope="row">{{i + 1}}</th>
+							<td scope="col">{{building.popOn}}</td>
+							<td>
+								<button (click)="navigate(i)" class="btn btn-primary">Navigate</button>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div><!-- End Page Title -->
+	</main><!-- End #main -->
+	<app-footer></app-footer>
+</body>

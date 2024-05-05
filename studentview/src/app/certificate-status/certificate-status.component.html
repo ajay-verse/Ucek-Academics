@@ -1,0 +1,48 @@
+<body class="{{class_name}}">
+	<app-header (toggleEvent)="changeClass()"></app-header>
+
+	<main id="main" class="main">
+
+		<div class="pagetitle">
+			<h1>Your Certificate Status</h1>
+		</div><!-- End Page Title -->
+
+		<section class="light">
+			<table class="table table-hover">
+				<thead>
+					<tr>
+						<th scope="col">S.No.</th>
+						<th scope="col">{{'Application Type'}}</th>
+						<th scope="col">{{'Name'}}</th>
+						<th scope="col">{{'Purpose'}}</th>
+						<th scope="col">{{'Duration in Months'}}</th>
+						<th scope="col">{{'DU Number'}}</th>
+						<th scope="col">{{'Date of Payment'}}</th>
+						<th scope="col">{{'Status'}}</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr *ngFor="let cert of certifcates; let i = index"
+						class="active-row">
+						<td class="middle">{{ i + 1 }}</td>
+						<td class="middle">{{ cert.application_type }}</td>
+						<td class="middle">{{ cert.name }}</td>
+						<td class="middle">{{ cert.purpose }}</td>
+						<td class="middle">{{ cert.duration }}</td>
+						<td class="middle">{{ cert.DU_number }}</td>
+						<td class="middle">{{ cert.date_of_payment.split('T')[0] }}</td>
+						<td class="middle">
+							<button class="btn {{cert.approved ? 'btn-success' : 'btn-warning'}}">
+								{{ cert.approved ? 'Approved' : 'Pending' }}
+							</button>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</section>
+	</main><!-- End #main -->
+
+	<!-- ======= Footer ======= -->
+	<app-footer></app-footer>
+
+</body>

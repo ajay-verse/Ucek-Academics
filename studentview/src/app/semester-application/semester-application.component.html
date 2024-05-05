@@ -1,0 +1,207 @@
+<ngx-loading [show]="loading"></ngx-loading>
+
+<body class="{{ class_name }}">
+	<app-header (toggleEvent)="changeClass()"></app-header>
+
+	<main id="main" class="main">
+		<div class="pagetitle">
+			<h1>Semester Application</h1>
+		</div>
+		<!-- End Page Title -->
+
+		<section class="bg-image">
+			<div
+				class="p-lg-5 p-md-3 p-sm-0 mask d-flex align-items-center h-100 gradient-custom-3"
+			>
+				<div class="container h-100">
+					<div
+						class="row d-flex justify-content-center align-items-center h-100"
+					>
+						<div class="col-12 col-md-9 col-lg-7 col-xl-6">
+							<div class="card" style="border-radius: 15px">
+								<div class="card-body p-5">
+									<h2 class="text-center fw-bold mb-5">
+										Semester Application
+									</h2>
+									<form
+										#semesterForm="ngForm"
+										(ngSubmit)="
+											applyForSemester(semesterForm.value)
+										"
+									>
+										<div class="form-outline mb-4">
+											<label class="form-label" for="roll"
+												>Roll Number</label
+											>
+											<input
+												type="text"
+												[(ngModel)]="roll"
+												id="roll"
+												name="roll"
+												class="form-control form-control-lg"
+												disabled="true"
+											/>
+										</div>
+										<div class="form-outline mb-4">
+											<div
+												class="form-check form-check-inline"
+											>
+												<input
+													class="form-check-input"
+													type="radio"
+													id="regular"
+													value="REG"
+													checked
+												/>
+												<label
+													class="form-check-label"
+													for="regular"
+												>
+													Regular Examination
+												</label>
+											</div>
+											<div
+												class="form-check form-check-inline"
+											>
+												<input
+													class="form-check-input"
+													type="radio"
+													id="supply"
+													disabled="true"
+												/>
+												<label
+													class="form-check-label"
+													for="supply"
+												>
+													Supply Examination
+												</label>
+											</div>
+										</div>
+										<div class="form-outline mb-4">
+											<label for="reg">Regulation</label>
+											<select
+												class="form-select"
+												id="regulation_"
+												[(ngModel)]="reg"
+												name="regulation_"
+												aria-label="Default select example"
+												disabled="true"
+											>
+												<option selected value="">
+													Select Regulation
+												</option>
+												<option value="R13">R13</option>
+												<option value="R16">R16</option>
+												<option value="R19">R19</option>
+												<option value="R20">R20</option>
+											</select>
+										</div>
+										<div class="form-outline mb-4">
+											<label for="year">Year</label>
+											<select
+												class="form-select"
+												id="year"
+												[(ngModel)]="year"
+												name="year"
+												aria-label="Default select example"
+											>
+												<option selected value="">
+													Select Year
+												</option>
+												<option value="1">
+													1st Year
+												</option>
+												<option value="2">
+													2nd Year
+												</option>
+												<option value="3">
+													3rd Year
+												</option>
+												<option value="4">
+													4th Year
+												</option>
+											</select>
+										</div>
+										<div class="form-outline mb-4">
+											<label for="sem"
+												>Select Semester</label
+											>
+											<select
+												class="form-select"
+												id="semester"
+												[(ngModel)]="sem"
+												name="semester"
+												aria-label="Default select example"
+											>
+												<option selected value="">
+													Select Semester
+												</option>
+												<option value="1">
+													1st Semester
+												</option>
+												<option value="2">
+													2nd Semester
+												</option>
+											</select>
+										</div>
+										<!-- <div class="form-outline mb-4">
+											<label class="form-label" for="form3Example3cg">Amount</label>
+											<input type="number" id="form3Example3cg" class="form-control form-control-lg" />
+										</div> -->
+										<div class="form-outline mb-4">
+											<label
+												class="form-label"
+												for="form3Example1cg"
+												>SUBJECTS</label
+											>
+											<input
+												type="text"
+												id="subjects"
+												name="subjects"
+												[(ngModel)]="subjects"
+												class="form-control form-control-lg"
+											/>
+										</div>
+										<div class="form-outline mb-4">
+											<label
+												class="form-label"
+												for="challana"
+												>DU Number / Payment ID</label
+											>
+											<input
+												type="text"
+												id="challana"
+												[(ngModel)]="challana"
+												name="challana"
+												class="form-control form-control-lg"
+											/>
+										</div>
+										<input
+											class="btn mb-3"
+											type="file"
+											#fileInput
+											(change)="handleFileInput($event)"
+										/>
+										<div
+											class="d-flex justify-content-center"
+										>
+											<input
+												type="submit"
+												class="btn btn-primary btn-block mb-4"
+												value="Submit"
+											/>
+										</div>
+									</form>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+	</main>
+	<!-- End #main -->
+
+	<!-- ======= Footer ======= -->
+	<app-footer></app-footer>
+</body>

@@ -1,0 +1,144 @@
+<body class="{{ class_name }}">
+	<app-header (toggleEvent)="changeClass()"></app-header>
+
+	<main id="main" class="main">
+		<div class="pagetitle">
+			<h1>Attendance</h1>
+		</div>
+		<!-- End Page Title -->
+
+		<form #resultForm="ngForm" (ngSubmit)="getAttendance(resultForm.value)">
+			<div class="form-floating container mt-3">
+				<select
+					class="form-select"
+					[(ngModel)]="selectedYear"
+					(change)="onYearChange()"
+					name="year"
+					id="year"
+					aria-label="Floating label select example"
+				>
+					<option selected value="0">Select Year</option>
+					<option value="1">1st year</option>
+					<option value="2">2nd year</option>
+					<option value="3">3rd year</option>
+					<option value="4">4th year</option>
+				</select>
+				<label for="floatingSelect" class="mx-3"
+					>Choose your year</label
+				>
+			</div>
+			<div class="form-floating container mt-3">
+				<select
+					class="form-select"
+					[(ngModel)]="selectedCourseCode"
+					name="courseCode"
+					id="courseCode"
+					aria-label="Floating label select example"
+				>
+					<option
+						*ngFor="let course of courseCodes"
+						[value]="course.course_code"
+					>
+						{{ course.course_code }}
+					</option>
+				</select>
+				<label for="courseCode" class="mx-3"
+					>Choose your course code</label
+				>
+			</div>
+			<div class="d-grid gap-2 col-6 mx-auto my-3">
+				<button class="btn btn-outline-primary" type="submit">
+					View Attendance
+				</button>
+			</div>
+		</form>
+
+		<section class="section" *ngIf="ryear">
+			<div class="row">
+				<div class="col-lg-12">
+					<div class="card">
+						<div class="card-body">
+							<h5 class="card-title">Year: {{ ryear }}</h5>
+
+							<!-- Table with hoverable rows -->
+							<table class="table table-hover">
+								<thead>
+									<tr>
+										<th scope="col">S.No.</th>
+										<th scope="col">
+											{{ "Month".toUpperCase() }}
+										</th>
+										<th scope="col">
+											{{
+												"Classes Conducted".toUpperCase()
+											}}
+										</th>
+										<th scope="col">
+											{{
+												"Classes Attended".toUpperCase()
+											}}
+										</th>
+										<th scope="col">
+											{{ "Percentage".toUpperCase() }}
+										</th>
+									</tr>
+								</thead>
+								<!-- <thead>
+									<tr>
+										<th >#</th>
+										<th scope="col">Name</th>
+										<th scope="col">Position</th>
+										<th scope="col">Age</th>
+										<th scope="col">Start Date</th>
+									</tr>
+								</thead> -->
+								<tbody>
+									<tr
+										*ngFor="
+											let sub of result.subjects;
+											let i = index
+										"
+										class="{{
+											sub.grade == 0
+												? 'inactive-row'
+												: 'active-row'
+										}}"
+									>
+										<td class="middle">{{ i + 1 }}</td>
+										<td class="middle">
+											{{ sub.month }}
+										</td>
+										<td>{{ sub.classesConducted }}</td>
+										<td class="middle">
+											{{ sub.classesAttended }}
+										</td>
+										<td class="middle">
+											{{
+												(
+													(sub.classesAttended /
+														sub.classesConducted) *
+													100
+												).toFixed(2)
+											}}%
+										</td>
+									</tr>
+								</tbody>
+							</table>
+							<!-- End Table with hoverable rows -->
+							<!-- <h3 class="display-6 container">
+								GPA : {{ result.total }}
+							</h3>
+							<h3 class="display-6 container">
+								Credits: {{ result.creditSum }}
+							</h3> -->
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+	</main>
+	<!-- End #main -->
+
+	<!-- ======= Footer ======= -->
+	<app-footer></app-footer>
+</body>

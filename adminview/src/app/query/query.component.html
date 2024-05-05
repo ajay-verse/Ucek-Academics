@@ -1,0 +1,74 @@
+<div *ngIf="show_img" class="pop-img">
+	<div class="text-center">
+		<div *ngIf="img_src" class="popImg">
+			<img [src]="img_src" alt="" class="text-center" />
+		</div>
+		<div *ngIf="!img_src" class="p-5 noPopImg">
+			<h1>Receipt Not Found</h1>
+		</div>
+	</div>
+</div>
+
+<ngx-loading [show]="loading"></ngx-loading>
+
+<body class="{{ class_name }}">
+	<app-header (toggleEvent)="changeClass()"></app-header>
+
+	<!-- ======= Sidebar ======= -->
+	<app-sidebar></app-sidebar>
+
+	<main id="main" class="main">
+		<div class="pagetitle">
+			<h1>Query</h1>
+		</div>
+		<!-- End Page Title -->
+
+		<section class="light">
+			<table class="table table-hover">
+				<thead>
+					<tr>
+						<th scope="col">S.No.</th>
+						<th scope="col">{{ "Name".toUpperCase() }}</th>
+						<th scope="col">{{ "Email".toUpperCase() }}</th>
+						<th scope="col">
+							{{ "Topic of subject".toUpperCase() }}
+						</th>
+						<th scope="col">{{ "Query msg".toUpperCase() }}</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr *ngFor="let app of query; let i = index">
+						<td scope="col">{{ i + 1 }}</td>
+						<td scope="col">{{ app.name }}</td>
+						<td scope="col">{{ app.email }}</td>
+						<td scope="col">{{ app.topic_of_subject }}</td>
+						<td scope="col">{{ app.query_msg }}</td>
+						<td class="col">
+							<button
+								class="btn btn-warning"
+								(click)="view(app.receipt)"
+							>
+								View
+							</button>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+			<!-- <div class="excel">
+				<section class="light">
+					<div class="container py-5">
+						<input type="file" (change)="changeExcelFile($event)" class="form-control" />
+						<div class="text-center mt-3">
+							<button class="btn btn-primary" (click)="approveApplications()">Approve
+								Applications</button>
+						</div>
+					</div>
+				</section>
+			</div> -->
+		</section>
+	</main>
+	<!-- End #main -->
+
+	<!-- ======= Footer ======= -->
+	<app-footer></app-footer>
+</body>

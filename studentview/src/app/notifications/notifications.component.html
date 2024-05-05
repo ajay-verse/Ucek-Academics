@@ -1,0 +1,46 @@
+<body class="{{class_name}}">
+	<app-header (toggleEvent)="changeClass()"></app-header>
+
+	<main id="main" class="main">
+
+		<div class="pagetitle">
+			<h1>Notifications</h1>
+		</div><!-- End Page Title -->
+		<div>
+			<select name="year" id="year" class="my-2 form-select" [(ngModel)]="year">
+				<option value="0">All Year</option>
+				<option value="1">1st Year</option>
+				<option value="2">2nd Year</option>
+				<option value="3">3rd Year</option>
+				<option value="4">4th Year</option>
+			</select>
+			<select name="branch" id="branch" class="my-2 form-select" [(ngModel)]="branch">
+				<option value="0">All branches</option>
+				<option value="1">CIVIL</option>
+				<option value="2">EEE</option>
+				<option value="3">MECH</option>
+				<option value="4">ECE</option>
+				<option value="5">CSE</option>
+				<option value="6">CHE</option>
+				<option value="7">PET</option>
+			</select>
+		</div>
+
+		<section class="light pt-3">
+			<div *ngFor="let obj of notifications" class="mt-3 border-1">
+				<div class="d-flex">
+					<p class="col-9">Notified On: {{obj.date_of_update}}</p>
+					<div class="d-flex col-3">
+						<h6 class="col-12">Year: {{year_map.get(obj.year)}}<span class="mx-2">|</span>Branch: {{branch_map.get(obj.branch)}}</h6>
+					</div>
+				</div>
+				<p class="text-muted">{{obj.data}}</p>
+				<hr />
+			</div>
+		</section>
+	</main><!-- End #main -->
+
+	<!-- ======= Footer ======= -->
+	<app-footer></app-footer>
+
+</body>

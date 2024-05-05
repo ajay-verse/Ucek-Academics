@@ -1,0 +1,19 @@
+.pop-img {
+	position: fixed;
+	z-index: 10000;
+	margin-top: 200px;
+	height: 200px;
+	width: 100%;
+}
+
+.noPopImg {
+	background-color: rgba(82, 119, 188, 0.659);
+}
+
+.popImg {
+	width: 100%;
+}
+
+.popImg img {
+	width: 700px;
+}

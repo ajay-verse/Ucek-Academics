@@ -1,0 +1,87 @@
+<ngx-loading [show]="loading"></ngx-loading>
+
+<body class="{{class_name}}">
+	<app-header (toggleEvent)="changeClass()"></app-header>
+
+	<main id="main" class="main">
+
+		<div class="pagetitle">
+			<h1>Newsfeed</h1>
+		</div><!-- End Page Title -->
+
+		<section class="light">
+			<div class="container py-2">
+				<div class="h1 text-center text-dark" id="pageHeaderTitle">Trending Technologies</div>
+
+				<div class="input-group rounded my-5">
+					<input type="search" class="form-control rounded" id="ssearch" [(ngModel)]="search" name="search"
+						placeholder="Search your favorite topics" aria-label="Search" aria-describedby="search-addon" />
+					<span class="input-group-text border-0" id="search-addon" (click)="getSearchResults()">
+						<i class="fas fa-search"></i>
+						<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+							class="bi bi-search" viewBox="0 0 16 16">
+							<path
+								d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
+						</svg>
+					</span>
+				</div>
+
+				<article class="postcard light blue" *ngFor="let feed of feeds">
+					<!-- <a class="postcard__img_link" href="#">
+							<img class="postcard__img" src="https://picsum.photos/1000/1000" alt="Image Title" />
+						</a> -->
+					<div class="postcard__text t-dark">
+						<h3 class="postcard__title blue"><a href="{{ feed.link }}">{{ feed.title }}</a></h3>
+						<div class="postcard__subtitle small">
+							<time datetime="2023-02-13 12:00:00">
+								<i class="fas fa-calendar-alt mr-2"></i>Mon, May 25th 2020
+							</time>
+						</div>
+						<div class="postcard__bar"></div>
+						<!-- <div class="postcard__preview-txt">{{ feed.snippet.split(". ,").join("<br />") }}</div> -->
+						<div class="postcard__preview-txt">{{ feed.snippet.split(" . ") }}</div>
+						<ul class="postcard__tagbox">
+							<!-- <li class="tag__item"><i class="fas fa-tag mr-2"></i>Podcast</li>
+								<li class="tag__item"><i class="fas fa-clock mr-2"></i>55 mins.</li>
+								<li class="tag__item play blue">
+									<a href="#"><i class="fas fa-play mr-2"></i>Play Episode</a>
+								</li> -->
+						</ul>
+					</div>
+					<hr />
+				</article>
+
+				<!-- <article class="postcard light red">
+						<a class="postcard__img_link" href="#">
+							<img class="postcard__img" src="https://picsum.photos/501/500" alt="Image Title" />
+						</a>
+						<div class="postcard__text t-dark">
+							<h1 class="postcard__title red"><a href="#">Podcast Title</a></h1>
+							<div class="postcard__subtitle small">
+								<time datetime="2020-05-25 12:00:00">
+									<i class="fas fa-calendar-alt mr-2"></i>Mon, May 25th 2020
+								</time>
+							</div>
+							<div class="postcard__bar"></div>
+							<div class="postcard__preview-txt">Lorem ipsum dolor sit amet consectetur adipisicing elit. Eligendi,
+								fugiat asperiores inventore beatae accusamus odit minima enim, commodi quia, doloribus eius! Ducimus
+								nemo accusantium maiores velit corrupti tempora reiciendis molestiae repellat vero. Eveniet ipsam
+								adipisci illo iusto quibusdam, sunt neque nulla unde ipsum dolores nobis enim quidem excepturi,
+								illum quos!</div>
+							<ul class="postcard__tagbox">
+								<li class="tag__item"><i class="fas fa-tag mr-2"></i>Podcast</li>
+								<li class="tag__item"><i class="fas fa-clock mr-2"></i>55 mins.</li>
+								<li class="tag__item play red">
+									<a href="#"><i class="fas fa-play mr-2"></i>Play Episode</a>
+								</li>
+							</ul>
+						</div>
+					</article> -->
+			</div>
+		</section>
+	</main><!-- End #main -->
+
+	<!-- ======= Footer ======= -->
+	<app-footer></app-footer>
+
+</body>

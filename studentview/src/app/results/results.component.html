@@ -1,0 +1,156 @@
+<body class="{{ class_name }}">
+	<app-header (toggleEvent)="changeClass()"></app-header>
+
+	<main id="main" class="main">
+		<div class="pagetitle">
+			<h1>Results</h1>
+		</div>
+		<!-- End Page Title -->
+
+		<form #resultForm="ngForm" (ngSubmit)="getResult(resultForm.value)">
+			<div class="form-floating container mt-5">
+				<select
+					class="form-select"
+					[(ngModel)]="regulation"
+					name="regulation_"
+					id="regulation"
+					aria-label="Floating label select example"
+				>
+					<option selected value="">Select Regulation</option>
+					<option value="R13">R13</option>
+					<option value="R16">R16</option>
+					<option value="R19">R19</option>
+					<option value="R20">R20</option>
+				</select>
+				<label for="floatingSelect" class="mx-3"
+					>Choose your Regulation</label
+				>
+			</div>
+			<div class="form-floating container mt-3">
+				<select
+					class="form-select"
+					ngModel
+					name="year"
+					id="year"
+					aria-label="Floating label select example"
+				>
+					<option selected value="0">Select Year</option>
+					<option value="1">1st year</option>
+					<option value="2">2nd year</option>
+					<option value="3">3rd year</option>
+					<option value="4">4th year</option>
+				</select>
+				<label for="floatingSelect" class="mx-3"
+					>Choose your year</label
+				>
+			</div>
+			<div class="form-floating container mt-3">
+				<select
+					class="form-select"
+					ngModel
+					name="semester"
+					id="semester"
+					aria-label="Floating label select example"
+				>
+					<option selected value="0">Select Semester</option>
+					<option value="1">1st Semester</option>
+					<option value="2">2nd Semester</option>
+				</select>
+				<label for="floatingSelect" class="mx-3"
+					>Choose your Semester</label
+				>
+			</div>
+			<div class="d-grid gap-2 col-6 mx-auto my-3">
+				<button class="btn btn-outline-primary" type="submit">
+					View Result
+				</button>
+			</div>
+		</form>
+
+		<section class="section" *ngIf="ryear && rsem">
+			<div class="row">
+				<div class="col-lg-12">
+					<div class="card">
+						<div class="card-body">
+							<h5 class="card-title">
+								Year: {{ ryear }}, semester: {{ rsem }}
+							</h5>
+
+							<!-- Table with hoverable rows -->
+							<table class="table table-hover">
+								<thead>
+									<tr>
+										<th scope="col">S.No.</th>
+										<th scope="col">
+											{{ "Course Code".toUpperCase() }}
+										</th>
+										<th scope="col">
+											{{ "Course Title".toUpperCase() }}
+										</th>
+										<th scope="col">
+											{{ "Grade Secured".toUpperCase() }}
+										</th>
+										<th scope="col">
+											{{ "Grade Points".toUpperCase() }}
+										</th>
+										<th scope="col">
+											{{ "Status".toUpperCase() }}
+										</th>
+									</tr>
+								</thead>
+								<!-- <thead>
+									<tr>
+										<th >#</th>
+										<th scope="col">Name</th>
+										<th scope="col">Position</th>
+										<th scope="col">Age</th>
+										<th scope="col">Start Date</th>
+									</tr>
+								</thead> -->
+								<tbody>
+									<tr
+										*ngFor="
+											let sub of result.subjects;
+											let i = index
+										"
+										class="{{
+											sub.grade == 0
+												? 'inactive-row'
+												: 'active-row'
+										}}"
+									>
+										<td class="middle">{{ i + 1 }}</td>
+										<td class="middle">
+											{{ sub.courseCode }}
+										</td>
+										<td>{{ sub.name }}</td>
+										<td class="middle">
+											{{ gradeMap[sub.grade] }}
+										</td>
+										<td class="middle">
+											{{ sub.grade }}
+										</td>
+										<td class="middle">
+											{{ sub.grade == 0 ? "F" : "P" }}
+										</td>
+									</tr>
+								</tbody>
+							</table>
+							<!-- End Table with hoverable rows -->
+							<!-- <h3 class="display-6 container">
+								GPA : {{ result.total }}
+							</h3>
+							<h3 class="display-6 container">
+								Credits: {{ result.creditSum }}
+							</h3> -->
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+	</main>
+	<!-- End #main -->
+
+	<!-- ======= Footer ======= -->
+	<app-footer></app-footer>
+</body>

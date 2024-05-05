@@ -1,0 +1,182 @@
+<!-- ======= Sidebar ======= -->
+<aside id="sidebar" class="sidebar">
+	<ul class="sidebar-nav" id="sidebar-nav">
+		<li class="nav-item" (click)="goToHome()">
+			<a class="nav-link">
+				<i class="bi bi-grid"></i>
+				<span>Dashboard</span>
+			</a>
+		</li>
+		<!-- End Dashboard Nav -->
+
+		<li class="nav-item">
+			<a
+				class="nav-link"
+				data-bs-target="#results-nav"
+				data-bs-toggle="collapse"
+				href="#"
+			>
+				<i class="bi bi-bar-chart"></i><span>Results</span
+				><i class="bi bi-chevron-down ms-auto"></i>
+			</a>
+			<ul
+				id="results-nav"
+				class="nav-content"
+				data-bs-parent="#sidebar-nav"
+			>
+				<li (click)="goToUploadResults()">
+					<a>
+						<i class="bi bi-circle"></i
+						><span>Upload Results (Regular)</span>
+					</a>
+				</li>
+				<li (click)="goToUploadResultsCsv()">
+					<a>
+						<i class="bi bi-circle"></i
+						><span>Upload Results (csv)</span>
+					</a>
+				</li>
+				<li (click)="goToUploadSupplyResults()">
+					<a>
+						<i class="bi bi-circle"></i
+						><span>Update Results (supplymentary)</span>
+					</a>
+				</li>
+			</ul>
+		</li>
+		<!-- End Charts Nav -->
+
+		<li class="nav-item">
+			<a
+				class="nav-link"
+				data-bs-target="#forms-nav"
+				data-bs-toggle="collapse"
+				href="#"
+			>
+				<i class="bi bi-journal-text"></i><span>Application Forms</span
+				><i class="bi bi-chevron-down ms-auto"></i>
+			</a>
+			<ul
+				id="forms-nav"
+				class="nav-content"
+				data-bs-parent="#sidebar-nav"
+			>
+				<li (click)="goToSemesterApplication()">
+					<a>
+						<i class="bi bi-circle"></i
+						><span>Semester Applications (Regular)</span>
+					</a>
+				</li>
+				<li (click)="goToSupplySemesterApplication()">
+					<a>
+						<i class="bi bi-circle"></i
+						><span>Semester Applications (supplymentary)</span>
+					</a>
+				</li>
+				<li (click)="goToApproveHalltickets()">
+					<a>
+						<i class="bi bi-circle"></i><span>Halltickets</span>
+					</a>
+				</li>
+
+				<li (click)="getRecordAttendance()">
+					<a>
+						<i class="bi bi-circle"></i
+						><span>Record Attendance</span>
+					</a>
+				</li>
+
+				<li (click)="goToSupplyCertificateApplication()">
+					<a>
+						<i class="bi bi-circle"></i
+						><span>Certificate Applications</span>
+					</a>
+				</li>
+				<li (click)="goToRevaluationApplication()">
+					<a>
+						<i class="bi bi-circle"></i
+						><span>Revaluation Applications</span>
+					</a>
+				</li>
+			</ul>
+		</li>
+		<!-- End Forms Nav -->
+
+		<!-- <li class="nav-item">
+			<a class="nav-link collapsed" data-bs-target="#details-nav" data-bs-toggle="collapse" href="#">
+				<i class="bi bi-card-list"></i><span>Update details (Academics)</span><i class="bi bi-chevron-down ms-auto"></i>
+			</a>
+			<ul id="details-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
+				<li (click)="goToUpdateRegulation()">
+					<a>
+						<i class="bi bi-circle"></i><span>Upload Regulation Details</span>
+					</a>
+				</li>
+				<li (click)="goToDeleteNotifications()">
+					<a>
+						<i class="bi bi-circle"></i><span>Delete Notifications</span>
+					</a>
+				</li>
+			</ul>
+		</li>End Forms Nav -->
+
+		<li class="nav-heading">Pages</li>
+
+		<li class="nav-item" (click)="goToProfile()">
+			<a class="nav-link collapsed">
+				<i class="bi bi-person"></i>
+				<span>Profile</span>
+			</a>
+		</li>
+		<!-- End Profile Page Nav -->
+
+		<li class="nav-item">
+			<a
+				class="nav-link"
+				data-bs-target="#forms-notif"
+				data-bs-toggle="collapse"
+				href="#"
+			>
+				<i class="bi bi-journal-text"></i><span>Notification</span
+				><i class="bi bi-chevron-down ms-auto"></i>
+			</a>
+			<ul
+				id="forms-notif"
+				class="nav-content"
+				data-bs-parent="#sidebar-nav"
+			>
+				<li class="nav-item" (click)="goToNotifications()">
+					<a class="nav-link collapsed">
+						<i class="bi bi-bell"></i>
+						<span>Upload Notifications</span>
+					</a>
+				</li>
+				<li class="nav-item" (click)="goToDeleteNotifications()">
+					<a class="nav-link collapsed">
+						<i class="bi bi-circle"></i
+						><span>Delete Notifications</span>
+					</a>
+				</li>
+			</ul>
+		</li>
+
+		<!-- End Notifications Page Nav -->
+
+		<li class="nav-item" (click)="goToQuery()">
+			<a class="nav-link collapsed">
+				<i class="bi bi-envelope"></i>
+				<span>Query</span>
+			</a>
+		</li>
+		<!-- End Contact Page Nav -->
+
+		<li class="nav-item" (click)="goToLogin()">
+			<a class="nav-link collapsed">
+				<i class="bi bi-box-arrow-in-right"></i>
+				<span>Logout</span>
+			</a>
+		</li>
+		<!-- End Login Page Nav -->
+	</ul>
+</aside>
+<!-- End Sidebar-->

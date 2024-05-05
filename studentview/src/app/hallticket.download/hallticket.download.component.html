@@ -1,0 +1,200 @@
+<body class="{{ class_name }}">
+	<app-header (toggleEvent)="changeClass()"></app-header>
+	<!-- <app-sidebar></app-sidebar> -->
+
+	<main id="main" class="main">
+		<div class="pagetitle">
+			<h1>Hallticket</h1>
+		</div>
+		<!-- End Page Title -->
+
+		<!-- HallTicket number, Name, FatherName, Branch, Examination particulars, Sem, regular/supply, ListOfSubjects -->
+
+		<section class="bg-image">
+			<div
+				class="p-lg-5 p-md-3 p-sm-0 mask d-flex align-items-center h-100 gradient-custom-3"
+			>
+				<div class="container h-100">
+					<div
+						class="row d-flex justify-content-center align-items-center h-100"
+					>
+						<div class="col-12 col-md-9 col-lg-7 col-xl-6">
+							<div class="card" style="border-radius: 15px">
+								<div class="card-body p-5">
+									<h2 class="text-center fw-bold mb-5">
+										Get Hallticket
+									</h2>
+									<form
+										#HallticketForm="ngForm"
+										(ngSubmit)="
+											createHallTicket(
+												HallticketForm.value
+											)
+										"
+									>
+										<div class="form-outline mb-4">
+											<label class="form-label" for="roll"
+												>Roll Number</label
+											>
+											<input
+												type="text"
+												ngModel
+												id="roll_no"
+												name="roll_no"
+												class="form-control form-control-lg"
+											/>
+										</div>
+										<div class="form-outline mb-4">
+											<label class="form-label" for="roll"
+												>Name</label
+											>
+											<input
+												type="text"
+												ngModel
+												id="name"
+												name="name"
+												class="form-control form-control-lg"
+											/>
+										</div>
+										<div class="form-outline mb-4">
+											<label class="form-label" for="roll"
+												>Father name</label
+											>
+											<input
+												type="text"
+												ngModel
+												id="father_name"
+												name="father_name"
+												class="form-control form-control-lg"
+											/>
+										</div>
+										<div class="form-outline mb-4">
+											<label class="form-label" for="roll"
+												>Branch</label
+											>
+											<input
+												type="text"
+												ngModel
+												id="branch"
+												name="branch"
+												class="form-control form-control-lg"
+											/>
+										</div>
+										<div class="form-outline mb-4">
+											<label class="form-label" for="year"
+												>Examination Year</label
+											>
+											<select
+												class="form-select"
+												ngModel
+												name="year"
+												id="year"
+												aria-label="Floating label select example"
+											>
+												<option selected value="0">
+													Select Year
+												</option>
+												<option value="1">
+													1st Year
+												</option>
+												<option value="2">
+													2nd Year
+												</option>
+												<option value="3">
+													3rd Year
+												</option>
+												<option value="4">
+													4th Year
+												</option>
+											</select>
+										</div>
+										<div class="form-outline mb-4">
+											<label class="form-label" for="roll"
+												>Choose your Semester</label
+											>
+											<select
+												class="form-select"
+												ngModel
+												name="semester"
+												id="semester"
+												aria-label="Floating label select example"
+											>
+												<option selected value="0">
+													Select Semester
+												</option>
+												<option value="1">
+													1st Semester
+												</option>
+												<option value="2">
+													2nd Semester
+												</option>
+											</select>
+										</div>
+										<div class="form-outline mb-4">
+											<label class="form-label" for="roll"
+												>Regular/Supply</label
+											>
+											<input
+												type="text"
+												ngModel
+												id="regularSupply"
+												name="regularSupply"
+												class="form-control form-control-lg"
+											/>
+										</div>
+										<div class="form-outline mb-4">
+											<label class="form-label" for="roll"
+												>List of subjects</label
+											>
+											<input
+												type="text"
+												ngModel
+												id="listOfSubjects"
+												name="listOfSubjects"
+												class="form-control form-control-lg"
+											/>
+										</div>
+										<!-- <div class="form-outline mb-4">
+											<label for="reg">Regulation</label>
+											<select
+												class="form-select"
+												id="regulation_"
+												[(ngModel)]="reg"
+												name="regulation_"
+												(change)="checkParams()"
+												aria-label="Default select example"
+												disabled="true"
+											>
+												<option selected value="">
+													Select Regulation
+												</option>
+												<option value="R13">R13</option>
+												<option value="R16">R16</option>
+												<option value="R19">R19</option>
+												<option value="R20">R20</option>
+											</select>
+										</div> -->
+
+										<div
+											class="d-flex justify-content-center"
+										>
+											<input
+												type="submit"
+												class="btn btn-primary btn-block mb-4"
+												value="Submit"
+											/>
+										</div>
+									</form>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+	</main>
+	<!-- End #main -->
+
+	<!-- ======= Footer ======= -->
+	<app-footer></app-footer>
+</body>

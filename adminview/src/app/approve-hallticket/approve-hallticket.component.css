@@ -1,0 +1,74 @@
+.pop-img {
+	position: fixed;
+	z-index: 10000;
+	margin-top: 200px;
+	height: 200px;
+	width: 100%;
+}
+
+.noPopImg {
+	background-color: rgba(82, 119, 188, 0.659);
+}
+
+.popImg {
+	width: 100%;
+}
+
+.popImg img {
+	width: 700px;
+}
+
+.table .th, .tr{
+	border: 1px 
+}
+
+
+#hallTicket {
+	width: 21cm;
+	height: 29.7cm;
+	margin: 0 auto;
+	padding: 40px;
+	border: 1px solid #000;
+	font-family: "Times New Roman", Times, serif;
+}
+
+#bonafide {
+	width: 21cm;
+	height: 19cm;
+	margin: 0 auto;
+	padding: 10px 50px;
+	border: 1px solid #000;
+}
+
+p {
+	margin: 0px;
+}
+
+.mdata {
+	margin: 0px;
+}
+.content {
+	border: 4px solid black;
+	width: 50%;
+	height: 50px;
+}
+
+.tab,
+th,
+td {
+	border: 2px solid black;
+	border-collapse: collapse;
+	text-align: center;
+}
+.tab {
+	width: 200px;
+}
+
+.dashed {
+	text-decoration: dotted !;
+	width: 10cm;
+}
+
+.key {
+	width: 10cm !;
+}

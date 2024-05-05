@@ -1,0 +1,62 @@
+<body class="{{class_name}}">
+	<app-header (toggleEvent)="changeClass()"></app-header>
+
+	<!-- ======= Sidebar ======= -->
+	<app-sidebar></app-sidebar>
+
+	<main id="main" class="main">
+
+		<div class="pagetitle">
+			<h1>Upload Results in excel</h1>
+		</div><!-- End Page Title -->
+
+		<section class="light">
+			<form #resultForm="ngForm">
+				<div class="d-flex">
+					<div class="form-floating container mt-3">
+						<select class="form-select" [(ngModel)]="regulation" (change)="checkParams()" name="regulation_"
+							id="regulation" aria-label="Floating label select example">
+							<option selected value="">Select Regulation</option>
+							<option value="R13">R13</option>
+							<option value="R16">R16</option>
+							<option value="R19">R19</option>
+							<option value="R20">R20</option>
+							<option value="R23">R23</option>
+						</select>
+						<label for="floatingSelect" class="mx-3">Choose your option</label>
+					</div>
+					<div class="form-floating container mt-3">
+						<select class="form-select" [(ngModel)]="year" (change)="checkParams()" name="year" id="year"
+							aria-label="Floating label select example">
+							<option selected value="">Select Year</option>
+							<option value="1">1st year</option>
+							<option value="2">2nd year</option>
+							<option value="3">3rd year</option>
+							<option value="4">4th year</option>
+						</select>
+						<label for="floatingSelect" class="mx-3">Choose your option</label>
+					</div>
+					<div class="form-floating container mt-3">
+						<select class="form-select" [(ngModel)]="semester" (change)="checkParams()" name="semester"
+							id="semester" aria-label="Floating label select example">
+							<option selected value="">Select Semester</option>
+							<option value="1">1st Semester</option>
+							<option value="2">2nd Semester</option>
+						</select>
+						<label for="floatingSelect" class="mx-3">Choose your option</label>
+					</div>
+				</div>
+			</form>
+			<div class="container py-5">
+				<input type="file" (change)="changeExcelFile($event)" class="form-control" />
+				<div class="text-center mt-3">
+					<button class="btn btn-primary" (click)="uploadResults()">Upload Results</button>
+				</div>
+			</div>
+		</section>
+	</main><!-- End #main -->
+
+	<!-- ======= Footer ======= -->
+	<app-footer></app-footer>
+
+</body>

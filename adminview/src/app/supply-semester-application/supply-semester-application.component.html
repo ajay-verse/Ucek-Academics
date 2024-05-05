@@ -1,0 +1,93 @@
+<div *ngIf="show_img" class="pop-img">
+	<div class="text-center">
+		<div *ngIf="img_src" class="popImg">
+			<img [src]="img_src" alt="" class="text-center" />
+		</div>
+		<div *ngIf="!img_src" class="p-5 noPopImg">
+			<h1>Receipt Not Found</h1>
+		</div>
+	</div>
+</div>
+
+<body class="{{ class_name }}">
+	<app-header (toggleEvent)="changeClass()"></app-header>
+
+	<!-- ======= Sidebar ======= -->
+	<app-sidebar></app-sidebar>
+
+	<main id="main" class="main">
+		<div class="pagetitle">
+			<h1>Supply Semester Applications</h1>
+		</div>
+		<!-- End Page Title -->
+
+		<section class="light">
+			<table class="table table-hover">
+				<thead>
+					<tr>
+						<th scope="col">S.No.</th>
+						<th scope="col">{{ "Roll No.".toUpperCase() }}</th>
+						<th scope="col">{{ "Year".toUpperCase() }}</th>
+						<th scope="col">{{ "Semester".toUpperCase() }}</th>
+						<th scope="col">{{ "Challana No.".toUpperCase() }}</th>
+						<th scope="col">{{ "Receipt".toUpperCase() }}</th>
+						<th scope="col">{{ "Permit".toUpperCase() }}</th>
+						<th scope="col">{{ "Reject".toUpperCase() }}</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr *ngFor="let app of applications; let i = index">
+						<td scope="col">{{ i + 1 }}</td>
+						<td scope="col">{{ app.roll }}</td>
+						<td scope="col">{{ year_map(app.year) }}</td>
+						<td scope="col">{{ semester_map(app.semester) }}</td>
+						<td scope="col">{{ app.challana }}</td>
+						<td class="col">
+							<a
+								target="_blank"
+								class="btn btn-warning"
+								href="{{ app.receipt }}"
+							>
+								View
+							</a>
+						</td>
+						<td scope="col">
+							<button
+								class="btn btn-primary"
+								(click)="
+									approveApplication(app.roll, app.challana)
+								"
+							>
+								Approve
+							</button>
+						</td>
+						<td scope="col">
+							<button
+								class="btn btn-danger"
+								(click)="
+									approveApplication(app.roll, app.challana)
+								"
+							>
+								Reject
+							</button>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+			<!-- <div class="excel">
+				<section class="light">
+					<div class="container py-5">
+						<input type="file" (change)="changeExcelFile($event)" class="form-control" />
+						<div class="text-center mt-3">
+							<button class="btn btn-primary" (click)="approveApplications()">Approve Applications</button>
+						</div>
+					</div>
+				</section>
+			</div> -->
+		</section>
+	</main>
+	<!-- End #main -->
+
+	<!-- ======= Footer ======= -->
+	<app-footer></app-footer>
+</body>

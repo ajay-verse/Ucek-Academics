@@ -1,0 +1,77 @@
+<body class="{{class_name}}">
+	<app-header (toggleEvent)="changeClass()"></app-header>
+
+	<!-- ======= Sidebar ======= -->
+	<app-sidebar></app-sidebar>
+
+	<main id="main" class="main">
+
+		<div class="pagetitle">
+			<h1>Update Regulation</h1>
+		</div><!-- End Page Title -->
+
+		<section class="light">
+			<form #regulationForm="ngForm" (ngSubmit)="updateRegulation(regulationForm.value)">
+				<div class="d-flex">
+					<div class="form-floating container mt-3">
+						<select class="form-select" ngModel name="regulation_" id="regulation"
+							aria-label="Floating label select example">
+							<option selected value="">Select Regulation</option>
+							<option value="R13">R13</option>
+							<option value="R16">R16</option>
+							<option value="R19">R19</option>
+							<option value="R20">R20</option>
+							<option value="R23">R23</option>
+						</select>
+						<label for="floatingSelect" class="mx-3">Choose your option</label>
+					</div>
+					<div class="form-floating container mt-3">
+						<select class="form-select" ngModel name="year" id="year"
+							aria-label="Floating label select example">
+							<option selected value="0">Select Year</option>
+							<option value="1">1st year</option>
+							<option value="2">2nd year</option>
+							<option value="3">3rd year</option>
+							<option value="4">4th year</option>
+						</select>
+						<label for="floatingSelect" class="mx-3">Choose your option</label>
+					</div>
+					<div class="form-floating container mt-3">
+						<select class="form-select" ngModel name="semester" id="semester"
+							aria-label="Floating label select example">
+							<option selected value="0">Select Semester</option>
+							<option value="1">1st Semester</option>
+							<option value="2">2nd Semester</option>
+						</select>
+						<label for="floatingSelect" class="mx-3">Choose your option</label>
+					</div>
+				</div>
+				<div *ngFor="let subject of subjects;let i = index" class="my-4">
+					<div class="d-flex my-1">
+						<div class="form-outline col-6 mx-4" >
+							<label class="form-label" for="code_{{i}}">Enter Subject Code</label>
+							<input type="text" ngModel name="code_{{i}}" id="code_{{i}}" class="form-control" />
+						</div>
+						<div class="form-outline col-3 mx-4">
+							<label class="form-label" for="credits_{{i}}">Enter Subject Credits</label>
+							<input type="text" ngModel name="credits_{{i}}" id="credits_{{i}}" class="form-control" />
+						</div>
+					</div>
+					<div class="form-outline mx-4">
+						<label class="form-label" for="name_{{i}}">Enter Subject Name</label>
+						<input type="text" ngModel name="name_{{i}}" id="name_{{i}}" class="form-control" />
+					</div>
+					<hr />
+				</div>
+				<div class="d-grid gap-2 col-6 mx-auto my-3">
+					<div (click)="addItem()" class="btn btn-primary">Add Subject</div>
+					<button class="btn btn-outline-primary" type="submit">Update regulation</button>
+				</div>
+			</form>
+		</section>
+	</main><!-- End #main -->
+
+	<!-- ======= Footer ======= -->
+	<app-footer></app-footer>
+
+</body>

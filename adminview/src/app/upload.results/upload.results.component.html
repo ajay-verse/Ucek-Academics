@@ -1,0 +1,169 @@
+<body class="{{ class_name }}">
+	<app-header (toggleEvent)="changeClass()"></app-header>
+
+	<!-- ======= Sidebar ======= -->
+	<app-sidebar></app-sidebar>
+
+	<main id="main" class="main">
+		<div class="pagetitle">
+			<h1>Upload Results</h1>
+		</div>
+		<!-- End Page Title -->
+
+		<section class="light">
+			<form
+				#resultForm="ngForm"
+				(ngSubmit)="uploadResult(resultForm.value)"
+			>
+				<div class="form-outline col-6 mx-4">
+					<label class="form-label" for="roll"
+						>Enter roll number</label
+					>
+					<input
+						type="text"
+						ngModel
+						name="roll"
+						id="roll"
+						class="form-control"
+					/>
+				</div>
+				<div class="d-flex">
+					<div class="form-floating container mt-3">
+						<select
+							class="form-select"
+							[(ngModel)]="regulation"
+							(change)="checkParams()"
+							name="regulation_"
+							id="regulation"
+							aria-label="Floating label select example"
+						>
+							<option selected value="">Select Regulation</option>
+							<option value="R13">R13</option>
+							<option value="R16">R16</option>
+							<option value="R19">R19</option>
+							<option value="R20">R20</option>
+							<option value="R23">R23</option>
+						</select>
+						<label for="floatingSelect" class="mx-3"
+							>Choose your option</label
+						>
+					</div>
+					<div class="form-floating container mt-3">
+						<select
+							class="form-select"
+							[(ngModel)]="year"
+							(change)="checkParams()"
+							name="year"
+							id="year"
+							aria-label="Floating label select example"
+						>
+							<option selected value="">Select Year</option>
+							<option value="1">1st year</option>
+							<option value="2">2nd year</option>
+							<option value="3">3rd year</option>
+							<option value="4">4th year</option>
+						</select>
+						<label for="floatingSelect" class="mx-3"
+							>Choose your option</label
+						>
+					</div>
+					<div class="form-floating container mt-3">
+						<select
+							class="form-select"
+							[(ngModel)]="semester"
+							(change)="checkParams()"
+							name="semester"
+							id="semester"
+							aria-label="Floating label select example"
+						>
+							<option selected value="">Select Semester</option>
+							<option value="1">1st Semester</option>
+							<option value="2">2nd Semester</option>
+						</select>
+						<label for="floatingSelect" class="mx-3"
+							>Choose your option</label
+						>
+					</div>
+				</div>
+				<table class="table table-hover mt-3">
+					<thead>
+						<tr class="">
+							<th scope="col">S.No.</th>
+							<th scope="col">Course Code</th>
+							<th scope="col">Course Title</th>
+							<th scope="col">Grade Points</th>
+							<th scope="col">
+								<button
+									type="button"
+									(click)="addRow()"
+									class="btn btn-primary"
+								>
+									Add Row
+								</button>
+							</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr *ngFor="let row of rows; let i = index" class="">
+							<td>{{ i + 1 }}</td>
+							<td>
+								<input
+									type="text"
+									name="course_code_{{ i }}"
+									class="form-control"
+									[(ngModel)]="row.courseCode"
+								/>
+							</td>
+							<td>
+								<input
+									type="text"
+									name="course_title_{{ i }}"
+									class="form-control"
+									[(ngModel)]="row.courseTitle"
+								/>
+							</td>
+							<td>
+								<select
+									class="form-select"
+									[(ngModel)]="row.gradePoints"
+									name="grade_{{ i }}"
+								>
+									<option value="">Select Grade</option>
+									<option value="10">A+</option>
+									<option value="9">A</option>
+									<option value="8">B</option>
+									<option value="7">C</option>
+									<option value="6">D</option>
+									<option value="5">E</option>
+									<option value="0">F</option>
+									<option value="-1">Not Conducted</option>
+								</select>
+							</td>
+							<td>
+								<button
+									(click)="removeRow(i)"
+									class="btn btn-danger"
+								>
+									Remove
+								</button>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+
+				<div *ngFor="let subject of subjects" class="d-flex">
+					<div></div>
+				</div>
+				<div class="d-grid gap-2 col-6 mx-auto my-3">
+					<button class="btn btn-outline-primary" type="submit">
+						Submit Result
+					</button>
+				</div>
+			</form>
+		</section>
+	</main>
+	<!-- End #main -->
+
+	<!-- ======= Footer ======= -->
+	<app-footer></app-footer>
+</body>

@@ -36,9 +36,9 @@
 						<th scope="col">
 							{{ "regular/Supply".toUpperCase() }}
 						</th>
-						<th scope="col">
+						<!-- <th scope="col">
 							{{ "listOfSubjects".toUpperCase() }}
-						</th>
+						</th> -->
 						<th scope="col">{{ "View".toUpperCase() }}</th>
 						<th scope="col">{{ "Approve".toUpperCase() }}</th>
 						<th scope="col">{{ "Reject".toUpperCase() }}</th>
@@ -53,7 +53,7 @@
 						<td scope="col">{{ app.name }}</td>
 						<td scope="col">{{ app.branch }}</td>
 						<td scope="col">{{ app.regularSupply }}</td>
-						<td scope="col">{{ app.listOfSubjects }}</td>
+						<!-- <td scope="col">{{ app.listOfSubjects }}</td> -->
 						<td scope="col">
 							<button
 								class="btn btn-primary"
@@ -203,14 +203,14 @@
 						</tr>
 						<tr *ngFor="let subject of theory; let i = index">
 							<td style="width: 5%;">{{i + 1}}</td>
-							<td style="width: 95%;">{{subject}}</td>
+							<td style="width: 95%; text-align: left; padding-left: 15px;">{{subject}}</td>
 						</tr>
 						<tr>
 							<th colspan="2" class="text-center"><b>PRATICALS</b></th>
 						</tr>
 						<tr *ngFor="let subject of labs; let i = index">
 							<td style="width: 5%;">{{i + 1}}</td>
-							<td style="width: 95%;">{{subject}}</td>
+							<td style="width: 95%; text-align: left; padding-left: 15px;">{{subject}}</td>
 						</tr>
 					</table>
 				</div>

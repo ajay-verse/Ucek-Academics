@@ -205,7 +205,9 @@ export class ApproveHallticketComponent {
 	s_branch : string = ""
 	s_roll : string = ""
 	subjects_string : string = ""
+	string_map : string = ""
 	e_type : string = ""
+	names: any = ""
 
 
 	// Function to convert a string to title case
@@ -215,34 +217,35 @@ export class ApproveHallticketComponent {
     });
 	}
 
-
 	getHallticket(app: any) {
 		this.e_type = app.regularSupply
 		this.s_roll = app.roll_no
 		this.student_name = app.name.toUpperCase()
 		this.s_father_name = app.father_name.toUpperCase()
-		this.subjects_string = app.listOfSubjects
 		this.s_year =  app.year,
 		this.s_semester =  app.semester,
 		this.s_branch = app.branch
 		this.theory = []
 		this.labs = []
 		this.roll_array = this.s_roll.split('')
-		this.subjects= this.subjects_string.split(",").map(item => this.toTitleCase(item.trim()));
-
 		if(this.e_type.toLowerCase().includes('reg')){
 			this.hallticket_data.exam_type = "REG"
 		} else{
 			this.hallticket_data.exam_type = "SUP"
 		}
-
-		for (const subject of this.subjects) {
-			if(subject.toLowerCase().includes('lab')) {
-				this.labs.push(subject)
-			} else {
-				this.theory.push(subject)
+		var params = {'regulation_': localStorage.getItem('regulation'), 'semester': app.semester, 'year': app.year}
+		this.bk.post('/regulation/subjects', params).subscribe(data => {
+			this.names = Object.entries(data.subjects)
+			let key_map = this.names[0][1]
+			// console.log(key_map)
+			for(let obj in key_map){
+				if(key_map[obj].name.toLowerCase().includes('lab')) {
+					this.labs.push(this.toTitleCase(key_map[obj].name))
+				} else {
+					this.theory.push(this.toTitleCase(key_map[obj].name))
+				}
 			}
-		}
+		})
 		this.show_doc = true;
 	}
 

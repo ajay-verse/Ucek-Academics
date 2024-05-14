@@ -34,10 +34,10 @@ const hallticketSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    listOfSubjects: {
-      type: String,
-      required: true,
-    },
+    // listOfSubjects: {
+    //   type: String,
+    //   required: true,
+    // },
     status: {
       type: Boolean,
       default: false,
